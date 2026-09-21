@@ -1,5 +1,3 @@
-# Create flake.nix in your project root
-cat > flake.nix << 'EOF'
 {
   description = "React (Vite) app with Nix";
 
@@ -14,7 +12,6 @@ cat > flake.nix << 'EOF'
         pkgs = import nixpkgs { inherit system; };
       in
       {
-        # Dev shell: nix develop
         devShells.default = pkgs.mkShell {
           packages = [ pkgs.nodejs_22 ];
           shellHook = ''
@@ -23,13 +20,11 @@ cat > flake.nix << 'EOF'
           '';
         };
 
-        # Production build: nix build
         packages.default = pkgs.buildNpmPackage {
           pname = "react-nix-app";
           version = "0.0.0";
           src = ./.;
 
-          # Replace this with the real hash after first build attempt
           npmDepsHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
 
           buildPhase = ''
@@ -44,4 +39,3 @@ cat > flake.nix << 'EOF'
       }
     );
 }
-EOF

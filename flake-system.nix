@@ -1,4 +1,3 @@
-cat > flake-system.nix << 'EOF'
 {
   description = "macOS system with nix-darwin + React app";
 
@@ -12,11 +11,10 @@ cat > flake-system.nix << 'EOF'
   outputs = { self, nixpkgs, nix-darwin, flake-utils }:
     {
       darwinConfigurations."my-machine" = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";  # Apple Silicon; use "x86_64-darwin" for Intel
+        system = "aarch64-darwin";
         modules = [
           ./darwin-configuration.nix
         ];
       };
     };
 }
-EOF
